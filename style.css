@@ -17,14 +17,15 @@ body {
   background-color: hsl(235, 21%, 11%);
   width: 90%;
   margin: 0 auto;
+  padding-top: 15%;
   display: flex;
-  align-items: center;
   justify-content: center;
+  transition: 0.5s;
 }
 
 main {
   display: flex;
-  flex-direction: column;  
+  flex-direction: column;
   width: 100%;
 }
 
@@ -43,6 +44,7 @@ h1 {
 .theme-icon {
   height: 26px;
   aspect-ratio: initial;
+  cursor: pointer;
 }
 
 .input-form {
@@ -57,6 +59,12 @@ h1 {
   padding: 15px;
   box-sizing: border-box;
   margin-bottom: 20px;
+  transition: 0.5s;
+}
+
+.clear,
+.filter-selection {
+  cursor: pointer;
 }
 
 .submit-circle {
@@ -64,26 +72,27 @@ h1 {
   color: transparent;
   background-color: transparent;
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
+  width: 0;
+  height: 0;
+  padding: 10px;
   margin-right: 10px;
-  transition: 0.5s;
+  cursor: pointer;
 }
 .submit-circle:hover {
   border: 1px solid hsl(236, 33%, 92%);
-  transition: 0.5s;
 }
 
 .input {
   background-color: transparent;
   border: none;
-  color:white;
+  color: white;
 }
 
 .todo-container {
   border-radius: 10px;
   width: 100%;
   margin-bottom: 20px;
+  box-shadow: 0 10px 30px 20px rgba(0, 0, 0, 0.205);
 }
 
 .example-task {
@@ -95,6 +104,7 @@ h1 {
   background-color: hsl(235, 24%, 19%);
   font-size: 0.7rem;
   color: hsl(234, 39%, 85%);
+  transition: 0.5s;
 }
 
 .todo-container:first-child {
@@ -116,6 +126,7 @@ h1 {
   justify-content: space-between;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+  transition: 0.5s;
 }
 
 .filter {
@@ -141,6 +152,7 @@ h1 {
   justify-content: center;
   padding: 20px;
   border-radius: 10px;
+  transition: 0.5s;
 }
 
 .filter-selection {
@@ -155,30 +167,56 @@ h1 {
   );
   height: unset;
   width: unset;
-  padding: 4.5px 3.5px;
+  padding: 5.5px 4.5px;
 }
 
-.checked-text{
-  text-decoration: line-through ;
+.active-filter {
+  color: rgb(52, 137, 187);
+  font-weight: 700;
+}
+
+body.light-theme {
+  background-image: url("images/bg-mobile-light.jpg");
+  background-color: hsl(0, 0%, 98%);
+  transition: 0.5s;
+}
+.light-theme {
+  background-color: white;
+  transition: 0.5s;
+}
+.checked-text {
+  text-decoration: line-through;
   color: rgb(156, 156, 156);
 }
 
-@media screen and (min-width:600px) {
-  body{
+@media screen and (min-width: 600px) {
+  body {
     background-image: url("images/bg-desktop-dark.jpg");
+    background-size: 100%;
+    padding-top: 2%;
   }
-  main{
-    width:500px;
+  main {
+    width: 500px;
   }
-  .action-bar{
-    grid-row:1;
-    grid-column:1 / span 3;
-    align-items:center;
-    height:100%;
-    box-sizing:border-box;
+  .action-bar {
+    grid-row: 1;
+    grid-column: 1 / span 3;
+    align-items: center;
+    height: 100%;
+    box-sizing: border-box;
   }
   .filter-container {
-    grid-row:1;
-    grid-column:2;
+    grid-row: 1;
+    grid-column: 2;
+  }
+  body.light-theme {
+    background-image: url("images/bg-desktop-light.jpg");
+    background-size: 100%;
+    background-color: hsl(0, 0%, 98%);
+    transition: 0.5s;
+  }
+  .light-theme {
+    background-color: white;
+    transition: 0.5s;
   }
 }
