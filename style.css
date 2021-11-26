@@ -102,7 +102,7 @@ h1 {
   align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
-  background-color: hsl(235, 24%, 19%);
+  background-color: inherit;
   font-size: 0.7rem;
   color: hsl(234, 39%, 85%);
   transition: 0.5s;
@@ -145,6 +145,10 @@ h1 {
   font-size: 0.75rem;
 }
 
+.list-container {
+  background-color: hsl(235, 24%, 19%);
+}
+
 .filter-container {
   background-color: hsl(235, 24%, 19%);
   display: flex;
@@ -183,7 +187,6 @@ body.light-theme {
 }
 .light-theme {
   background-color: white;
-  transition: 0.5s;
 }
 .checked-text {
   text-decoration: line-through;

@@ -139,9 +139,7 @@ const changeTheme = function () {
   document.body.classList.toggle("light-theme");
   inputForm.classList.toggle("light-theme");
   document.querySelector(".action-bar").classList.toggle("light-theme");
-  document
-    .querySelectorAll(".example-task")
-    .forEach((element) => element.classList.toggle("light-theme"));
+  taskContainer.classList.toggle("light-theme");
   if (themeBtn.src.includes("sun")) {
     themeBtn.src = "images/icon-moon.svg";
   } else {
