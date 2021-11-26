@@ -19,11 +19,12 @@ body {
   margin: 0 auto;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 main {
   display: flex;
-  flex-direction: column;
+  flex-direction: column;  
   width: 100%;
 }
 
@@ -76,6 +77,7 @@ h1 {
 .input {
   background-color: transparent;
   border: none;
+  color:white;
 }
 
 .todo-container {
@@ -154,4 +156,29 @@ h1 {
   height: unset;
   width: unset;
   padding: 4.5px 3.5px;
+}
+
+.checked-text{
+  text-decoration: line-through ;
+  color: rgb(156, 156, 156);
+}
+
+@media screen and (min-width:600px) {
+  body{
+    background-image: url("images/bg-desktop-dark.jpg");
+  }
+  main{
+    width:500px;
+  }
+  .action-bar{
+    grid-row:1;
+    grid-column:1 / span 3;
+    align-items:center;
+    height:100%;
+    box-sizing:border-box;
+  }
+  .filter-container {
+    grid-row:1;
+    grid-column:2;
+  }
 }
