@@ -8,7 +8,11 @@ const sampleArray = [
   "Complete Todo App on Frontend Mentor",
 ];
 
-const container = document.querySelector(".todo-container");
+const container = document.querySelector(".list-container");
+const inputForm = document.querySelector(".input-form");
+const inputField = document.querySelector(".input")
+
+
 const insertTask = function (ele, index) {
   const element = `<div class="example-task">
     <input
@@ -19,7 +23,7 @@ const insertTask = function (ele, index) {
       alt="Submit button"
       class="submit-circle ${index == 0 ? "checked" : ""}"
     />
-    <p>${ele}</p>
+    <p class="${index == 0 ? "checked-text" : ""}">${ele}</p>
     <input
       type="image"
       src="images/icon-cross.svg"
@@ -29,28 +33,31 @@ const insertTask = function (ele, index) {
       class="remove-icon"
     />
   </div>`;
-  container.insertAdjacentHTML("afterbegin", element);
+  container.insertAdjacentHTML("beforeend", element);
 };
-(function () {
+const populateList = function () {
+  container.innerHTML = ''
   sampleArray.forEach((ele, index) => insertTask(ele, index));
-})();
+}
+populateList()
+//functions
+const addToDo = function (e){
+  console.log(inputField.value);
+  sampleArray.push(inputField.value)
+  inputField.value = ''
+  populateList()
+  }
 
-/* <div class="example-task">
-          <input
-            type="image"
-            src="images/icon-check.svg"
-            width="11"
-            height="9"
-            alt="Submit button"
-            class="submit-circle checked"
-          />
-          <p>Jog around the park</p>
-          <input
-            type="image"
-            src="images/icon-cross.svg"
-            width="13"
-            height="13"
-            alt="Submit button"
-            class="remove-icon"
-          />
-        </div> */
+//event listeners 
+
+inputForm.addEventListener('submit', function(e){
+  e.preventDefault()
+addToDo(e)})
+
+container.addEventListener('click', function(e){
+  e.preventDefault()
+  if(event.target.classList.contains("submit-circle")){event.target.classList.add("checked")
+  event.target.nextElementSibling.classList.add("checked-text")
+}
+
+})
