@@ -1,29 +1,95 @@
 "use strict";
 
-const sampleArray = [
-  "Jog around the park 3x",
-  "10 minutes meditation",
-  "Read for 1 hour",
-  "Pick up groceries",
-  "Complete Todo App on Frontend Mentor",
+//variable(s)
+
+//Initial template todo list
+const items = [
+  { text: "Complete online JavaScript course", checked: false },
+  { text: "Jog around the park 3x", checked: false },
+  { text: "10 minutes meditation", checked: false },
+  { text: "Read for one hour", checked: false },
+  { text: "Pick up groceries", checked: false },
+  { text: "Complete Todo App on Frontend Mentor", checked: false },
 ];
 
-const container = document.querySelector(".list-container");
-const inputForm = document.querySelector(".input-form");
-const inputField = document.querySelector(".input")
+//functions
 
+const submitTask = function () {
+  if (inputField.value) {
+    items.push({ text: inputField.value, checked: 0 });
+    inputField.value = "";
+    inputField.placeholder = "Create a new todo...";
+    populateList();
+  } else {
+    inputField.placeholder = "Please add a todo...";
+  }
+  //If todo input field is empty, does nothing, if not, adds a new item to array, repopulates list with new todo
+};
 
-const insertTask = function (ele, index) {
+const checkItem = function (event) {
+  if (event.target.classList.contains("submit-circle")) {
+    event.target.classList.toggle("checked");
+    const paragraph = event.target.nextElementSibling;
+    paragraph.classList.toggle("checked-text");
+    const targetObject = items.find(
+      (element) => element.text == paragraph.innerHTML
+    );
+    targetObject.checked = !targetObject.checked;
+    countActiveTasks();
+  }
+  //Changes checked object css, and toggles the target object's boolean checked property, also updates 'items left' count
+};
+
+const removeItem = function (event) {
+  if (event.target.classList.contains("remove-icon")) {
+    items.splice(
+      items.indexOf(
+        items.find(
+          (element) =>
+            element.text == event.target.previousElementSibling.innerHTML
+        )
+      ),
+      1
+    );
+    populateList();
+  }
+  //If cross icon is pressed, finds index of targeted task object and deletes it, repopulates the list to update
+};
+
+const clearCompleted = function (event) {
+  if (event.target.classList.contains("clear")) {
+    //Loops from end to start to avoid deleting an element, the next element taking its place, and then that element getting skipped over
+    for (let i = items.length - 1; i > -1; i--) {
+      if (items[i].checked) items.splice(i, 1);
+    }
+    populateList();
+  }
+  //Loops over the list, if object is marked as checked, deletes it, repopulates
+};
+
+const applyFilter = function (e) {
+  if (e.target.classList.contains("filter-selection")) {
+    populateList(e.target.dataset.filter);
+    document.querySelectorAll(".filter-selection").forEach((filter) => {
+      filter.classList.remove("active-filter");
+      e.target.classList.add("active-filter");
+    });
+  }
+  //Each filter selection has data-filter variable added. This function repopulates the list passing in the filter
+  //Also removes "active" css stlying from all filter buttons, and adds it back to the one selected
+};
+
+const insertTaskHtml = function (task) {
   const element = `<div class="example-task">
     <input
-      type="${index == 0 ? "image" : "submit"}"
-      src="${index == 0 ? "images/icon-check.svg" : ""}"
+      type="image"
+      src="images/icon-check.svg"
       width="11"
       height="9"
       alt="Submit button"
-      class="submit-circle ${index == 0 ? "checked" : ""}"
+      class="submit-circle ${task.checked == true ? "checked" : ""}"
     />
-    <p class="${index == 0 ? "checked-text" : ""}">${ele}</p>
+    <p class="${task.checked == true ? "checked-text" : ""}">${task.text}</p>
     <input
       type="image"
       src="images/icon-cross.svg"
@@ -33,31 +99,93 @@ const insertTask = function (ele, index) {
       class="remove-icon"
     />
   </div>`;
-  container.insertAdjacentHTML("beforeend", element);
+  taskContainer.insertAdjacentHTML("beforeend", element);
+  //Generates HTML for each list entry and renders it on the list
 };
-const populateList = function () {
-  container.innerHTML = ''
-  sampleArray.forEach((ele, index) => insertTask(ele, index));
-}
-populateList()
-//functions
-const addToDo = function (e){
-  console.log(inputField.value);
-  sampleArray.push(inputField.value)
-  inputField.value = ''
-  populateList()
+
+const populateList = function (filter) {
+  switch (filter) {
+    default:
+      taskContainer.innerHTML = "";
+      items.forEach((task) => insertTaskHtml(task));
+      break;
+    case "active":
+      taskContainer.innerHTML = "";
+      items.forEach((task) => {
+        if (!task.checked) insertTaskHtml(task);
+      });
+      break;
+    case "completed":
+      taskContainer.innerHTML = "";
+      items.forEach((task) => {
+        if (task.checked) insertTaskHtml(task);
+      });
+      break;
   }
+  countActiveTasks();
+  //With no filter passied in, does regular populating, with filter, switches to filtered population
+};
 
-//event listeners 
+const countActiveTasks = function () {
+  const remaining = items.filter((task) => !task.checked).length;
+  document.querySelector(".remaining-items").innerHTML = `${remaining} item${
+    remaining == 1 ? "" : "s"
+  } left`;
+  //Simply prints out the length of an array filtered to contain only tasks not checked (checked=0)
+};
 
-inputForm.addEventListener('submit', function(e){
-  e.preventDefault()
-addToDo(e)})
+const changeTheme = function () {
+  document.querySelector(".filter-container").classList.toggle("light-theme");
+  document.body.classList.toggle("light-theme");
+  inputForm.classList.toggle("light-theme");
+  document.querySelector(".action-bar").classList.toggle("light-theme");
+  document
+    .querySelectorAll(".example-task")
+    .forEach((element) => element.classList.toggle("light-theme"));
+  if (themeBtn.src.includes("sun")) {
+    themeBtn.src = "images/icon-moon.svg";
+  } else {
+    themeBtn.src = "images/icon-sun.svg";
+  }
+  //Toggles light-theme css class on all relevant elements, and switches the button image
+};
 
-container.addEventListener('click', function(e){
-  e.preventDefault()
-  if(event.target.classList.contains("submit-circle")){event.target.classList.add("checked")
-  event.target.nextElementSibling.classList.add("checked-text")
-}
+//element selectors
 
-})
+const themeBtn = document.querySelector(".theme-icon");
+
+const inputForm = document.querySelector(".input-form");
+
+const taskContainer = document.querySelector(".list-container");
+
+const inputField = document.querySelector(".input");
+
+const filterBar = document.querySelector(".filter");
+
+//event listeners
+
+inputForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+  submitTask();
+});
+
+taskContainer.addEventListener("click", function (e) {
+  e.preventDefault();
+  checkItem(e);
+  removeItem(e);
+});
+
+themeBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+  changeTheme();
+});
+
+filterBar.addEventListener("click", function (e) {
+  e.preventDefault();
+  applyFilter(e);
+  clearCompleted(e);
+});
+
+//init
+
+populateList();
