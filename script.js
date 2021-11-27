@@ -134,6 +134,18 @@ const countActiveTasks = function () {
   //Simply prints out the length of an array filtered to contain only tasks not checked (checked=0)
 };
 
+const displayCross = function(event){
+    if(event.target.classList.contains("example-task")){
+      event.target.lastElementChild.classList.add("remove-visible")
+  }
+}
+
+const hideCross = function(event){
+  if(event.target.classList.contains("example-task")){
+    event.target.lastElementChild.classList.remove("remove-visible")
+}
+}
+
 const changeTheme = function () {
   document.querySelector(".filter-container").classList.toggle("light-theme");
   document.body.classList.toggle("light-theme");
@@ -172,6 +184,17 @@ taskContainer.addEventListener("click", function (e) {
   checkItem(e);
   removeItem(e);
 });
+
+taskContainer.addEventListener('mouseover',function(e){
+  e.preventDefault();
+  displayCross(e);
+})
+
+taskContainer.addEventListener('mouseout',function(e){
+  e.preventDefault();
+  hideCross(e);
+})
+
 
 themeBtn.addEventListener("click", function (e) {
   e.preventDefault();
