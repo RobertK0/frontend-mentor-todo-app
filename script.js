@@ -2,7 +2,7 @@
 
 //variable(s)
 
-//Initial template todo list  
+//Initial template todo list
 const items = JSON.parse(localStorage.getItem("todo_list")) || [
   { text: "Complete online JavaScript course", checked: false },
   { text: "Jog around the park 3x", checked: false },
@@ -27,7 +27,7 @@ const submitTask = function () {
 };
 
 const checkItem = function (event) {
-  if (event.target.classList.contains("submit-circle")) {
+  if (event.target.classList.contains("gray-cover")) {
     event.target.classList.toggle("checked");
     const paragraph = event.target.nextElementSibling;
     paragraph.classList.toggle("checked-text");
@@ -81,14 +81,16 @@ const applyFilter = function (e) {
 
 const insertTaskHtml = function (task) {
   const element = `<div class="example-task">
+    
     <input
       type="image"
       src="images/icon-check.svg"
       width="11"
       height="9"
       alt="Submit button"
-      class="submit-circle ${task.checked == true ? "checked" : ""}"
+      class="submit-circle "
     />
+    <div class="gray-cover ${task.checked == true ? "checked" : ""}"></div>
     <p class="${task.checked == true ? "checked-text" : ""}">${task.text}</p>
     <input
       type="image"
@@ -123,7 +125,18 @@ const populateList = function (filter) {
       break;
   }
   countActiveTasks();
-  //With no filter passied in, does regular populating, with filter, switches to filtered population
+  //With no filter passed in, does regular populating, with filter, switches to filtered population
+  for (let i = 0; i < exampleTasks.length; i++) {
+    exampleTasks[i].addEventListener("mouseover", function (e) {
+      e.preventDefault();
+      displayCross(e);
+    });
+    exampleTasks[i].addEventListener("mouseout", function (e) {
+      e.preventDefault();
+      hideCross(e);
+    });
+  }
+  //After regenerating task list, (re)attaches event listeners to new tasks, to show/hide cross
 };
 
 const countActiveTasks = function () {
@@ -134,17 +147,17 @@ const countActiveTasks = function () {
   //Simply prints out the length of an array filtered to contain only tasks not checked (checked=0)
 };
 
-const displayCross = function(event){
-    if(event.target.classList.contains("example-task")){
-      event.target.lastElementChild.classList.add("remove-visible")
+const displayCross = function (event) {
+  if (event.currentTarget.classList.contains("example-task")) {
+    event.currentTarget.lastElementChild.classList.add("remove-visible");
   }
-}
+};
 
-const hideCross = function(event){
-  if(event.target.classList.contains("example-task")){
-    event.target.lastElementChild.classList.remove("remove-visible")
-}
-}
+const hideCross = function (event) {
+  if (event.target.classList.contains("example-task")) {
+    event.target.lastElementChild.classList.remove("remove-visible");
+  }
+};
 
 const changeTheme = function () {
   document.querySelector(".filter-container").classList.toggle("light-theme");
@@ -152,6 +165,7 @@ const changeTheme = function () {
   inputForm.classList.toggle("light-theme");
   document.querySelector(".action-bar").classList.toggle("light-theme");
   taskContainer.classList.toggle("light-theme");
+  inputField.classList.toggle("light-theme");
   if (themeBtn.src.includes("sun")) {
     themeBtn.src = "images/icon-moon.svg";
   } else {
@@ -160,9 +174,9 @@ const changeTheme = function () {
   //Toggles light-theme css class on all relevant elements, and switches the button image
 };
 
-window.onbeforeunload=function(){
-  localStorage.setItem("todo_list", JSON.stringify(items))
-}
+window.onbeforeunload = function () {
+  localStorage.setItem("todo_list", JSON.stringify(items));
+};
 
 //element selectors
 
@@ -175,6 +189,8 @@ const taskContainer = document.querySelector(".list-container");
 const inputField = document.querySelector(".input");
 
 const filterBar = document.querySelector(".filter");
+
+const exampleTasks = document.getElementsByClassName("example-task");
 
 //event listeners
 
@@ -189,16 +205,15 @@ taskContainer.addEventListener("click", function (e) {
   removeItem(e);
 });
 
-taskContainer.addEventListener('mouseover',function(e){
-  e.preventDefault();
-  displayCross(e);
-})
+// taskContainer.addEventListener("mouseover", function (e) {
+//   e.preventDefault();
+//   displayCross(e);
+// });
 
-taskContainer.addEventListener('mouseout',function(e){
-  e.preventDefault();
-  hideCross(e);
-})
-
+// taskContainer.addEventListener("mouseout", function (e) {
+//   e.preventDefault();
+//   hideCross(e);
+// });
 
 themeBtn.addEventListener("click", function (e) {
   e.preventDefault();
