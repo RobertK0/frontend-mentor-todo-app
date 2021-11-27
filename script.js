@@ -7,7 +7,7 @@ const items = JSON.parse(localStorage.getItem("todo_list")) || [
   { text: "Complete online JavaScript course", checked: false },
   { text: "Jog around the park 3x", checked: false },
   { text: "10 minutes meditation", checked: false },
-  { text: "Read for one hour", checked: false },
+  { text: "Read for 1 hour", checked: false },
   { text: "Pick up groceries", checked: false },
   { text: "Complete Todo App on Frontend Mentor", checked: false },
 ];
@@ -95,8 +95,8 @@ const insertTaskHtml = function (task) {
     <input
       type="image"
       src="images/icon-cross.svg"
-      width="13"
-      height="13"
+      width="20"
+      height="20"
       alt="Submit button"
       class="remove-icon"
     />
