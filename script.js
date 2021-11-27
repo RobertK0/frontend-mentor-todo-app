@@ -2,8 +2,8 @@
 
 //variable(s)
 
-//Initial template todo list
-const items = [
+//Initial template todo list  
+const items = JSON.parse(localStorage.getItem("todo_list")) || [
   { text: "Complete online JavaScript course", checked: false },
   { text: "Jog around the park 3x", checked: false },
   { text: "10 minutes meditation", checked: false },
@@ -159,6 +159,10 @@ const changeTheme = function () {
   }
   //Toggles light-theme css class on all relevant elements, and switches the button image
 };
+
+window.onbeforeunload=function(){
+  localStorage.setItem("todo_list", JSON.stringify(items))
+}
 
 //element selectors
 
