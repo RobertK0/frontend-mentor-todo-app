@@ -38,7 +38,6 @@ const checkItem = function (event) {
     countActiveTasks();
   }
   if (event.target.tagName.toLowerCase() === "p") {
-    console.log("yay");
     event.target.previousElementSibling.classList.toggle("checked");
     const paragraph = event.target;
     paragraph.classList.toggle("checked-text");
@@ -91,7 +90,7 @@ const applyFilter = function (e) {
 };
 
 const insertTaskHtml = function (task) {
-  const element = `<div class="example-task">
+  const element = `<div class="task">
     
     <input
       type="image"
@@ -101,8 +100,8 @@ const insertTaskHtml = function (task) {
       alt="Submit button"
       class="submit-circle "
     />
-    <div class="gray-cover ${task.checked == true ? "checked" : ""}"></div>
-    <p class="task-text ${task.checked == true ? "checked-text" : ""}">${
+    <div class="gray-cover${task.checked == true ? " checked" : ""}"></div>
+    <p class="task-text${task.checked == true ? " checked-text" : ""}">${
     task.text
   }</p>
     <input
@@ -161,13 +160,13 @@ const countActiveTasks = function () {
 };
 
 const displayCross = function (event) {
-  if (event.currentTarget.classList.contains("example-task")) {
+  if (event.currentTarget.classList.contains("task")) {
     event.currentTarget.lastElementChild.classList.add("remove-visible");
   }
 };
 
 const hideCross = function (event) {
-  if (event.target.classList.contains("example-task")) {
+  if (event.target.classList.contains("task")) {
     event.target.lastElementChild.classList.remove("remove-visible");
   }
 };
@@ -178,7 +177,6 @@ const changeTheme = function () {
   inputForm.classList.toggle("light-theme");
   document.querySelector(".action-bar").classList.toggle("light-theme");
   taskContainer.classList.toggle("light-theme");
-  inputField.classList.toggle("light-theme");
   if (themeBtn.src.includes("sun")) {
     themeBtn.src = "images/icon-moon.svg";
   } else {
@@ -203,7 +201,7 @@ const inputField = document.querySelector(".input");
 
 const filterBar = document.querySelector(".filter");
 
-const exampleTasks = document.getElementsByClassName("example-task");
+const exampleTasks = document.getElementsByClassName("task");
 
 //event listeners
 
