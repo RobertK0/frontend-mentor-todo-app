@@ -37,6 +37,17 @@ const checkItem = function (event) {
     targetObject.checked = !targetObject.checked;
     countActiveTasks();
   }
+  if (event.target.tagName.toLowerCase() === "p") {
+    console.log("yay");
+    event.target.previousElementSibling.classList.toggle("checked");
+    const paragraph = event.target;
+    paragraph.classList.toggle("checked-text");
+    const targetObject = items.find(
+      (element) => element.text == paragraph.innerHTML
+    );
+    targetObject.checked = !targetObject.checked;
+    countActiveTasks();
+  }
   //Changes checked object css, and toggles the target object's boolean checked property, also updates 'items left' count
 };
 
@@ -91,7 +102,9 @@ const insertTaskHtml = function (task) {
       class="submit-circle "
     />
     <div class="gray-cover ${task.checked == true ? "checked" : ""}"></div>
-    <p class="${task.checked == true ? "checked-text" : ""}">${task.text}</p>
+    <p class="task-text ${task.checked == true ? "checked-text" : ""}">${
+    task.text
+  }</p>
     <input
       type="image"
       src="images/icon-cross.svg"
