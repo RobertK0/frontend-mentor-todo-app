@@ -178,7 +178,7 @@ h1 {
 .action-bar {
   background-color: hsl(235, 24%, 19%);
   grid-row: 1;
-  padding: 20px 12px;
+  padding: 20px 22px;
   grid-column: 1 / span 3;
   display: flex;
   justify-content: space-between;
