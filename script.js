@@ -216,16 +216,6 @@ taskContainer.addEventListener("click", function (e) {
   removeItem(e);
 });
 
-// taskContainer.addEventListener("mouseover", function (e) {
-//   e.preventDefault();
-//   displayCross(e);
-// });
-
-// taskContainer.addEventListener("mouseout", function (e) {
-//   e.preventDefault();
-//   hideCross(e);
-// });
-
 themeBtn.addEventListener("click", function (e) {
   e.preventDefault();
   changeTheme();
