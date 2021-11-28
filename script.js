@@ -19,6 +19,12 @@ const submitTask = function () {
     items.push({ text: inputField.value, checked: 0 });
     inputField.value = "";
     inputField.placeholder = "Create a new todo...";
+    document.querySelectorAll(".filter-selection").forEach((filter) => {
+      filter.classList.remove("active-filter");
+      document
+        .querySelector(".filter-selection")
+        .classList.add("active-filter");
+    });
     populateList();
   } else {
     inputField.placeholder = "Please add a todo...";
@@ -215,6 +221,16 @@ taskContainer.addEventListener("click", function (e) {
   checkItem(e);
   removeItem(e);
 });
+
+// taskContainer.addEventListener("mouseover", function (e) {
+//   e.preventDefault();
+//   displayCross(e);
+// });
+
+// taskContainer.addEventListener("mouseout", function (e) {
+//   e.preventDefault();
+//   hideCross(e);
+// });
 
 themeBtn.addEventListener("click", function (e) {
   e.preventDefault();
