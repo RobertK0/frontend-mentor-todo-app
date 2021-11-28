@@ -4,7 +4,7 @@
 
 //Initial template todo list
 const items = JSON.parse(localStorage.getItem("todo_list")) || [
-  { text: "Complete online JavaScript course", checked: false },
+  { text: "Complete online JavaScript course", checked: true },
   { text: "Jog around the park 3x", checked: false },
   { text: "10 minutes meditation", checked: false },
   { text: "Read for 1 hour", checked: false },
