@@ -33,26 +33,18 @@ const submitTask = function () {
 };
 
 const checkItem = function (event) {
-  if (event.target.classList.contains("gray-cover")) {
-    event.target.classList.toggle("checked");
-    const paragraph = event.target.nextElementSibling;
-    paragraph.classList.toggle("checked-text");
-    const targetObject = items.find(
-      (element) => element.text == paragraph.innerHTML
-    );
-    targetObject.checked = !targetObject.checked;
-    countActiveTasks();
-  }
-  if (event.target.tagName.toLowerCase() === "p") {
-    event.target.previousElementSibling.classList.toggle("checked");
-    const paragraph = event.target;
-    paragraph.classList.toggle("checked-text");
-    const targetObject = items.find(
-      (element) => element.text == paragraph.innerHTML
-    );
-    targetObject.checked = !targetObject.checked;
-    countActiveTasks();
-  }
+  const targetTask = event.parentNode.querySelector(".task-text");
+  targetTask.classList.toggle("checked-text");
+  event.parentNode
+    .querySelector(".icon-check")
+    .classList.toggle("icon-checked");
+
+  const targetObject = items.find(
+    (element) => element.text == targetTask.innerHTML
+  );
+  targetObject.checked = !targetObject.checked;
+  countActiveTasks();
+
   //Changes checked object css, and toggles the target object's boolean checked property, also updates 'items left' count
 };
 
@@ -96,29 +88,29 @@ const applyFilter = function (e) {
 };
 
 const insertTaskHtml = function (task) {
-  const element = `<div class="task">
-    
-    <input
-      type="image"
-      src="images/icon-check.svg"
-      width="11"
-      height="9"
-      alt="Submit button"
-      class="submit-circle "
-    />
-    <div class="gray-cover${task.checked == true ? " checked" : ""}"></div>
-    <p class="task-text${task.checked == true ? " checked-text" : ""}">${
-    task.text
-  }</p>
-    <input
-      type="image"
-      src="images/icon-cross.svg"
-      width="20"
-      height="20"
-      alt="Submit button"
-      class="remove-icon"
-    />
-  </div>`;
+  const element = `
+          <li class="task">
+            <fieldset>
+              <label>
+               <input type="checkbox" class="checkbox"${
+                 task.checked == true ? " checked" : ""
+               }/>
+               <svg xmlns="http://www.w3.org/2000/svg" class="icon-check${
+                 task.checked == true ? " icon-checked" : ""
+               }"><path fill="none"  stroke-width="2" d="M1 4.304L3.696 7l6-6"/></svg>
+               
+               <span class="task-text${
+                 task.checked == true ? " checked-text" : ""
+               }">${task.text}</span>
+               </label>
+               <label class="remove-button">
+                <button >
+                 <img src="images/icon-cross.svg" alt="" class="remove-icon">
+               </button>
+              </label>
+            </fieldset>
+          </li>
+  `;
   taskContainer.insertAdjacentHTML("beforeend", element);
   //Generates HTML for each list entry and renders it on the list
 };
@@ -167,13 +159,18 @@ const countActiveTasks = function () {
 
 const displayCross = function (event) {
   if (event.currentTarget.classList.contains("task")) {
-    event.currentTarget.lastElementChild.classList.add("remove-visible");
+    event.target
+      .closest(".task")
+      .querySelector(".remove-icon")
+      .classList.add("remove-visible");
   }
 };
 
 const hideCross = function (event) {
   if (event.target.classList.contains("task")) {
-    event.target.lastElementChild.classList.remove("remove-visible");
+    event.target
+      .querySelector(".remove-icon")
+      .classList.remove("remove-visible");
   }
 };
 
@@ -215,11 +212,14 @@ inputForm.addEventListener("submit", function (e) {
 });
 
 taskContainer.addEventListener("click", function (e) {
-  e.preventDefault();
-  checkItem(e);
-  removeItem(e);
+  // removeItem(e);
 });
 
+taskContainer.addEventListener("change", function (e) {
+  if (e.target.classList.contains("checkbox")) {
+    checkItem(e.target);
+  }
+});
 // taskContainer.addEventListener("mouseover", function (e) {
 //   e.preventDefault();
 //   displayCross(e);

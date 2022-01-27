@@ -119,6 +119,23 @@ main {
   color: hsl(234, 39%, 85%);
 }
 
+.task input[type="checkbox"] {
+  height: 0;
+  width: 0;
+  opacity: 0;
+}
+
+.task button {
+  background-color: transparent;
+  margin-left: auto;
+  transition: 0.3s;
+  opacity: 1;
+}
+
+.task-text {
+  list-style: none;
+}
+
 .task {
   position: relative;
   display: flex;
@@ -128,6 +145,17 @@ main {
   font-size: 0.97rem;
   transition: 0.5s;
   border-bottom: 1px solid hsl(237, 14%, 26%);
+}
+
+.task fieldset {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.task label {
+  display: flex;
+  align-items: center;
 }
 
 .submit-circle {
@@ -148,6 +176,10 @@ main {
   color: rgb(156, 156, 156);
 }
 
+.remove-button {
+  margin-left: auto;
+}
+
 .gray-cover {
   height: 23px;
   width: 23px;
@@ -166,11 +198,24 @@ main {
 .checked {
   opacity: 0;
 }
+.icon-check {
+  height: 9px;
+  width: 11px;
+  stroke: transparent;
+  padding: 8px 7px;
+  margin-right: 25px;
+  border-radius: 50%;
+  border: 1px solid #555;
+  color: transparent;
+}
 
-.remove-icon {
-  margin-left: auto;
-  transition: 0.3s;
-  opacity: 1;
+.icon-checked {
+  stroke: #fff;
+  background-image: linear-gradient(
+    to bottom right,
+    hsl(192, 100%, 67%),
+    hsl(280, 87%, 65%)
+  );
 }
 
 .filter {
