@@ -199,6 +199,7 @@ main {
   opacity: 0;
 }
 .icon-check {
+  cursor: pointer;
   height: 9px;
   width: 11px;
   stroke: transparent;
@@ -216,6 +217,7 @@ main {
     hsl(192, 100%, 67%),
     hsl(280, 87%, 65%)
   );
+  border: 1px solid transparent;
 }
 
 .filter {
@@ -260,6 +262,8 @@ main {
 
 .filter-selection {
   margin: 0 10px;
+  background-color: transparent;
+  color: inherit;
 }
 
 .active-filter {

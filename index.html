@@ -79,17 +79,31 @@
             </label>
           </li>
         </ul>
-        <nav class="filter">
+        <div class="filter">
           <div class="action-bar">
             <p class="remaining-items">5 items left</p>
             <p class="clear">Clear Completed</p>
           </div>
           <div class="filter-container">
-            <p class="filter-selection active-filter" data-filter="all">All</p>
-            <p class="filter-selection" data-filter="active">Active</p>
-            <p class="filter-selection" data-filter="completed">Completed</p>
+            <button
+              type="button"
+              class="filter-selection active-filter"
+              data-filter="all"
+            >
+              All
+            </button>
+            <button type="button" class="filter-selection" data-filter="active">
+              Active
+            </button>
+            <button
+              type="button"
+              class="filter-selection"
+              data-filter="completed"
+            >
+              Completed
+            </button>
           </div>
-        </nav>
+        </div>
       </div>
     </main>
     <body></body>
