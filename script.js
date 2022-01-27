@@ -183,11 +183,9 @@ const changeTheme = function () {
   inputForm.classList.toggle("light-theme");
   document.querySelector(".action-bar").classList.toggle("light-theme");
   taskContainer.classList.toggle("light-theme");
-  if (themeBtn.src.includes("sun")) {
-    themeBtn.src = "images/icon-moon.svg";
-  } else {
-    themeBtn.src = "images/icon-sun.svg";
-  }
+  document
+    .querySelectorAll(".theme-icon")
+    .forEach((icon) => icon.classList.toggle("hidden"));
   //Toggles light-theme css class on all relevant elements, and switches the button image
 };
 
@@ -197,7 +195,7 @@ window.onbeforeunload = function () {
 
 //element selectors
 
-const themeBtn = document.querySelector(".theme-icon");
+const themeToggle = document.querySelector(".theme-toggle");
 
 const inputForm = document.querySelector(".input-form");
 
@@ -232,9 +230,8 @@ taskContainer.addEventListener("click", function (e) {
 //   hideCross(e);
 // });
 
-themeBtn.addEventListener("click", function (e) {
-  e.preventDefault();
-  changeTheme();
+themeToggle.addEventListener("change", function (e) {
+  if (e.target.classList.contains("theme-radio")) changeTheme();
 });
 
 filterBar.addEventListener("click", function (e) {

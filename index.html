@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- displays site properly based on user's device -->
 
     <link
       rel="icon"
@@ -35,10 +34,32 @@
   </head>
   <body>
     <main>
-      <div class="title">
-        <h1>TODO</h1>
-        <img src="images/icon-sun.svg" alt="sun icon" class="theme-icon" />
-      </div>
+      <header class="header">
+        <h1 class="title">Todo</h1>
+
+        <fieldset class="theme-toggle">
+          <label
+            ><input
+              type="radio"
+              name="theme"
+              value="light"
+              class="theme-radio" />
+            <img class="theme-icon" src="images/icon-sun.svg" alt="sun"
+          /></label>
+          <label
+            ><input
+              type="radio"
+              name="theme"
+              value="dark"
+              class="theme-radio"
+              checked />
+            <img
+              class="theme-icon hidden"
+              src="images/icon-moon.svg"
+              alt="moon"
+          /></label>
+        </fieldset>
+      </header>
       <form class="input-form" spellcheck="false">
         <input type="submit" alt="Submit button" class="submit-task" />
         <input type="text" class="input" placeholder="Create a new todo..." />
