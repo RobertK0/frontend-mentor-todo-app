@@ -49,12 +49,13 @@ const checkItem = function (event) {
 };
 
 const removeItem = function (event) {
-  if (event.target.classList.contains("remove-icon")) {
+  if (event.target.classList.contains("remove-button")) {
     items.splice(
       items.indexOf(
         items.find(
           (element) =>
-            element.text == event.target.previousElementSibling.innerHTML
+            element.text ==
+            event.target.closest(".task").querySelector(".task-text").innerHTML
         )
       ),
       1
@@ -103,9 +104,11 @@ const insertTaskHtml = function (task) {
                  task.checked == true ? " checked-text" : ""
                }">${task.text}</span>
                </label>
-               <label class="remove-button">
-                <button >
-                 <img src="images/icon-cross.svg" alt="" class="remove-icon">
+               <label class="remove">
+                <button class="remove-button" aria-label="remove todo item ${
+                  task.text
+                }">
+                 
                </button>
               </label>
             </fieldset>
@@ -161,7 +164,7 @@ const displayCross = function (event) {
   if (event.currentTarget.classList.contains("task")) {
     event.target
       .closest(".task")
-      .querySelector(".remove-icon")
+      .querySelector(".remove-button")
       .classList.add("remove-visible");
   }
 };
@@ -169,7 +172,7 @@ const displayCross = function (event) {
 const hideCross = function (event) {
   if (event.target.classList.contains("task")) {
     event.target
-      .querySelector(".remove-icon")
+      .querySelector(".remove-button")
       .classList.remove("remove-visible");
   }
 };
@@ -212,7 +215,7 @@ inputForm.addEventListener("submit", function (e) {
 });
 
 taskContainer.addEventListener("click", function (e) {
-  // removeItem(e);
+  removeItem(e);
 });
 
 taskContainer.addEventListener("change", function (e) {
@@ -220,15 +223,6 @@ taskContainer.addEventListener("change", function (e) {
     checkItem(e.target);
   }
 });
-// taskContainer.addEventListener("mouseover", function (e) {
-//   e.preventDefault();
-//   displayCross(e);
-// });
-
-// taskContainer.addEventListener("mouseout", function (e) {
-//   e.preventDefault();
-//   hideCross(e);
-// });
 
 themeToggle.addEventListener("change", function (e) {
   if (e.target.classList.contains("theme-radio")) changeTheme();

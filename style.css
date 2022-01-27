@@ -125,13 +125,6 @@ main {
   opacity: 0;
 }
 
-.task button {
-  background-color: transparent;
-  margin-left: auto;
-  transition: 0.3s;
-  opacity: 1;
-}
-
 .task-text {
   list-style: none;
 }
@@ -158,46 +151,30 @@ main {
   align-items: center;
 }
 
-.submit-circle {
-  color: transparent;
-  background-color: transparent;
-  border-radius: 50%;
-  background-image: linear-gradient(
-    to bottom right,
-    hsl(192, 100%, 67%),
-    hsl(280, 87%, 65%)
-  );
-  padding: 8px 7px;
-  margin-right: 25px;
-}
-
 .checked-text {
   text-decoration: line-through;
   color: rgb(156, 156, 156);
 }
 
-.remove-button {
+.remove {
   margin-left: auto;
 }
 
-.gray-cover {
-  height: 23px;
-  width: 23px;
-  background-color: inherit;
-  border-radius: 50%;
-  border: 1px solid hsl(237, 14%, 26%);
-  position: absolute;
+.remove-button {
+  background-image: url(images/icon-cross.svg);
+  height: 18px;
+  width: 18px;
   cursor: pointer;
-}
-
-.gray-cover:hover {
-  border: none;
-  margin: 1px;
-}
-
-.checked {
   opacity: 0;
+  background-color: transparent;
+  margin-left: auto;
+  transition: 0.3s;
 }
+
+.remove-visible {
+  opacity: 1;
+}
+
 .icon-check {
   cursor: pointer;
   height: 9px;
@@ -289,14 +266,6 @@ main {
 
   main {
     width: 540px;
-  }
-
-  .remove-icon {
-    opacity: 0;
-  }
-
-  .remove-visible {
-    opacity: 1;
   }
 
   .action-bar {
