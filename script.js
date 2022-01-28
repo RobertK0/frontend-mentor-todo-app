@@ -185,7 +185,7 @@ const changeTheme = function () {
   taskContainer.classList.toggle("light-theme");
   document
     .querySelectorAll(".theme-icon")
-    .forEach((icon) => icon.classList.toggle("hidden"));
+    .forEach((icon) => icon.classList.toggle("visible"));
   //Toggles light-theme css class on all relevant elements, and switches the button image
 };
 
@@ -224,8 +224,21 @@ taskContainer.addEventListener("change", function (e) {
   }
 });
 
-themeToggle.addEventListener("change", function (e) {
-  if (e.target.classList.contains("theme-radio")) changeTheme();
+themeToggle.addEventListener("click", function (e) {
+  e.preventDefault();
+  let unchecked;
+  if (e.target.parentNode.querySelector(".theme-radio")) {
+    e.target
+      .closest(".theme-toggle")
+      .querySelectorAll(".theme-radio")
+      .forEach((element) => {
+        if (!element.checked) unchecked = element;
+      });
+    unchecked.checked = !unchecked.checked;
+    changeTheme();
+  }
+
+  //Accessibility hack-around, prevents default behaviour of radio button, instead inverts radio button state on every click
 });
 
 filterBar.addEventListener("click", function (e) {

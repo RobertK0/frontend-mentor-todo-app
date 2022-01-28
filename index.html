@@ -42,27 +42,31 @@
             ><input
               type="radio"
               name="theme"
-              value="light"
-              class="theme-radio" />
+              value="dark"
+              class="theme-radio"
+              checked
+            />
             <img
-              class="theme-icon"
+              class="theme-icon visible"
               src="images/icon-sun.svg"
               alt=""
               aria-hidden="true"
-          /></label>
+            />
+          </label>
           <label
             ><input
               type="radio"
               name="theme"
-              value="dark"
+              value="light"
               class="theme-radio"
-              checked />
+            />
             <img
-              class="theme-icon hidden"
+              class="theme-icon"
               src="images/icon-moon.svg"
               alt=""
               aria-hidden="true"
-          /></label>
+            />
+          </label>
         </fieldset>
       </header>
       <form class="input-form" spellcheck="false">
@@ -82,7 +86,7 @@
         <div class="filter">
           <div class="action-bar">
             <p class="remaining-items">5 items left</p>
-            <p class="clear">Clear Completed</p>
+            <button type="button" class="clear">Clear Completed</button>
           </div>
           <div class="filter-container">
             <button
