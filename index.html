@@ -13,16 +13,6 @@
 
     <title>Todo app</title>
 
-    <!-- Feel free to remove these styles or customise in your own stylesheet 👍
-    <style>
-      .attribution {
-        font-size: 11px;
-        text-align: center;
-      }
-      .attribution a {
-        color: hsl(228, 45%, 44%);
-      }
-    </style> -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -74,15 +64,7 @@
         <input type="text" class="input" placeholder="Create a new todo..." />
       </form>
       <div class="todo-container">
-        <ul class="list-container">
-          <li class="task">
-            <label>
-              <input type="checkbox" />
-              <span>Task</span>
-              <input type="button" />
-            </label>
-          </li>
-        </ul>
+        <ul class="list-container" aria-live="polite"></ul>
         <div class="filter">
           <div class="action-bar">
             <p class="remaining-items">5 items left</p>
