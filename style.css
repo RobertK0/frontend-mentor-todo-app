@@ -1,3 +1,9 @@
+:root {
+  --main-bg-color: hsl(235, 21%, 11%);
+  --element-color: hsl(235, 24%, 19%);
+  --text: hsl(234, 39%, 85%);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -15,19 +21,18 @@ body {
   background-image: url("images/bg-mobile-dark.jpg");
   background-size: 100%;
   background-repeat: no-repeat;
-  background-color: hsl(235, 21%, 11%);
+  background-color: var(--main-bg-color);
   width: 90%;
   box-sizing: border-box;
   margin: 0 auto;
   padding-top: 15%;
   display: flex;
   justify-content: center;
-  transition: 0.5s;
+  transition: all 0.5s;
 }
 
 body.light-theme {
   background-image: url("images/bg-mobile-light.jpg");
-  transition: 0.5s;
 }
 
 main {
@@ -69,15 +74,15 @@ button {
 }
 
 .input-form {
-  background-color: hsl(235, 24%, 19%);
-  color: hsl(234, 39%, 85%);
+  background-color: var(--element-color);
+  color: var(--text);
   box-shadow: 0 10px 30px 10px rgba(0, 0, 0, 0.205);
   display: flex;
   align-items: center;
   border-radius: 5px;
   padding: 7.5px 22px;
   margin-bottom: 20px;
-  transition: 0.5s;
+  transition: all 0.5s;
 }
 
 .input-circle {
@@ -108,6 +113,7 @@ button:focus-visible,
 }
 
 .todo-container {
+  background-color: var(--element-color);
   box-shadow: 0 10px 30px 20px rgba(0, 0, 0, 0.205);
   margin-bottom: 20px;
   border-radius: 5px;
@@ -115,6 +121,7 @@ button:focus-visible,
   overflow-y: scroll;
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
+  transition: all 0.5s;
 }
 
 .todo-container::-webkit-scrollbar {
@@ -127,8 +134,7 @@ button:focus-visible,
 }
 
 .list-container {
-  background-color: hsl(235, 24%, 19%);
-  color: hsl(234, 39%, 85%);
+  color: var(--text);
 }
 
 .task input[type="checkbox"] {
@@ -139,6 +145,7 @@ button:focus-visible,
 
 .task-text {
   list-style: none;
+  transition: all 0.5s;
 }
 
 .task {
@@ -148,7 +155,6 @@ button:focus-visible,
   padding: 19.5px 22px;
   background-color: inherit;
   font-size: 0.97rem;
-  transition: 0.5s;
   border-bottom: 1px solid hsl(237, 14%, 26%);
 }
 
@@ -222,14 +228,12 @@ button:focus-visible,
 }
 
 .action-bar {
-  background-color: hsl(235, 24%, 19%);
   grid-row: 1;
   padding: 20px 22px;
   grid-column: 1 / span 3;
   display: flex;
   justify-content: space-between;
   border-radius: 0 0 5px 5px;
-  transition: 0.5s;
 }
 
 .task-text,
@@ -240,11 +244,10 @@ button:focus-visible,
 
 .clear:hover,
 .filter-selection:hover {
-  color: hsl(234, 39%, 85%);
+  color: var(--text);
 }
 
 .filter-container {
-  background-color: hsl(235, 24%, 19%);
   display: flex;
   justify-content: center;
   grid-column: span 3;
@@ -262,11 +265,6 @@ button:focus-visible,
   font-weight: 700;
 }
 
-.light-theme {
-  background-color: hsl(0, 0%, 100%);
-  color: hsl(235, 19%, 35%);
-}
-
 @media screen and (min-width: 600px) {
   body {
     background-image: url("images/bg-desktop-dark.jpg");
@@ -275,7 +273,6 @@ button:focus-visible,
 
   body.light-theme {
     background-image: url("images/bg-desktop-light.jpg");
-    transition: 0.5s;
   }
 
   main {
