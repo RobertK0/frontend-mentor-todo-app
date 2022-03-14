@@ -177,12 +177,25 @@ const hideCross = function (event) {
   }
 };
 
+let lightThemeBool = false;
+
 const changeTheme = function () {
-  document.querySelector(".filter-container").classList.toggle("light-theme");
+  let color1, color2, colorText;
+  if (lightThemeBool) {
+    color1 = "hsl(235, 21%, 11%)";
+    color2 = "hsl(235, 24%, 19%)";
+    colorText = "hsl(234, 39%, 85%)";
+    lightThemeBool = !lightThemeBool;
+  } else {
+    color1 = "hsl(0, 0%, 100%)";
+    color2 = "hsl(0, 0%, 100%)";
+    colorText = "hsl(235, 19%, 35%)";
+    lightThemeBool = !lightThemeBool;
+  }
+  document.querySelector(":root").style.setProperty("--main-bg-color", color1);
+  document.querySelector(":root").style.setProperty("--element-color", color2);
+  document.querySelector(":root").style.setProperty("--text", colorText);
   document.body.classList.toggle("light-theme");
-  inputForm.classList.toggle("light-theme");
-  document.querySelector(".action-bar").classList.toggle("light-theme");
-  taskContainer.classList.toggle("light-theme");
   document
     .querySelectorAll(".theme-icon")
     .forEach((icon) => icon.classList.toggle("visible"));
