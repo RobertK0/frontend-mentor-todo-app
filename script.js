@@ -40,10 +40,11 @@ const checkItem = function (event) {
     .classList.toggle("icon-checked");
 
   const targetObject = items.find(
-    (element) => element.text == targetTask.innerHTML
+    (element) => element.text === targetTask.innerHTML
   );
   targetObject.checked = !targetObject.checked;
   countActiveTasks();
+  saveState();
 
   //Changes checked object css, and toggles the target object's boolean checked property, also updates 'items left' count
 };
@@ -150,6 +151,7 @@ const populateList = function (filter) {
     });
   }
   //After regenerating task list, (re)attaches event listeners to new tasks, to show/hide cross
+  saveState();
 };
 
 const countActiveTasks = function () {
@@ -196,13 +198,14 @@ const changeTheme = function () {
   document.querySelector(":root").style.setProperty("--element-color", color2);
   document.querySelector(":root").style.setProperty("--text", colorText);
   document.body.classList.toggle("light-theme");
+
   document
     .querySelectorAll(".theme-icon")
     .forEach((icon) => icon.classList.toggle("visible"));
   //Toggles light-theme css class on all relevant elements, and switches the button image
 };
 
-window.onbeforeunload = function () {
+const saveState = function () {
   localStorage.setItem("todo_list", JSON.stringify(items));
 };
 
